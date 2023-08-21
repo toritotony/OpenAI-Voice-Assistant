@@ -1,8 +1,10 @@
 import gradio as gr
-import openai, config, subprocess
+import openai, config
+import pyttsx3
+
 openai.api_key = config.OPENAI_API_KEY
 
-messages = [{"role": "system", "content": 'You are a therapist. Respond to all input in 25 words or less.'}]
+messages = [{"role": "system", "content": 'Your a life coach. Respond to all inputs in 50 words or less.'}]
 
 def transcribe(audio):
     global messages
@@ -17,7 +19,14 @@ def transcribe(audio):
     system_message = response["choices"][0]["message"]
     messages.append(system_message)
 
-    subprocess.call(["say", system_message['content']])
+    # Initialize the text-to-speech engine
+    engine = pyttsx3.init()
+
+    # Convert system message to speech
+    engine.say(system_message['content'])
+
+    # Wait for the speech to finish
+    engine.runAndWait()
 
     chat_transcript = ""
     for message in messages:

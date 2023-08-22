@@ -1,5 +1,7 @@
 # Voice Assistant Web Application
 
+## Note: This application is not complete and is subject to change in near future. I defer anyone from using this to avoid bugs
+
 Welcome to the Voice Assistant Web Application repository! This project demonstrates a simple web application that utilizes OpenAI's GPT-3.5 model and speech recognition to create a voice assistant that can interact with users through voice commands.
 
 ## Features

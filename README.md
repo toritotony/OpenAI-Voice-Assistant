@@ -117,21 +117,21 @@ The Voice Assistant Web Application is a Flask-based project that integrates Ope
 
 ## Troubleshooting
 
-- **Ensure the OpenAI API Key is correctly configured in config.py**
+- Ensure the OpenAI API Key is correctly configured in config.py
 
-- **Verify your microphone is functioning and accessible to the application**
+- Verify your microphone is functioning and accessible to the application
 
-- **Check the browser console or Flask logs for errors if the assitant does not respond**
+- Check the browser console or Flask logs for errors if the assitant does not respond
 
 ---
 
 ## Future Enhancements
 
-- **Add natural language understanding capabilities for broader command recognition**
+- Add natural language understanding capabilities for broader command recognition
 
-- **Enhance error handling for audio transcription and API calls**
+- Enhance error handling for audio transcription and API calls
 
-- **Integrate additional voice control features**
+- Integrate additional voice control features
 
 ---
 

@@ -5,4 +5,4 @@ Procfile
 config.py 
 appv2.py
 temp_audio.wav
-templates\indexv2.html
+templates/indexv2.html

@@ -6,6 +6,9 @@ import threading
 import time
 import speech_recognition as sr
 
+trigger_captured = threading.Event()
+response_processed = threading.Event()
+
 app = Flask(__name__)
 
 # Configure OpenAI API key
@@ -16,8 +19,7 @@ recognizer = sr.Recognizer()
 
 conversation = []
 assistant_active = False
-isTriggerCaptured = False
-response_processed = threading.Event()
+isTriggerCaptured = False  # Define the variable here
 
 def transcribe_and_submit(audio_path):
     global conversation
@@ -56,6 +58,7 @@ def listen_for_trigger():
                         print("Begin function")
                         conversation = []
                         isTriggerCaptured = True
+                        trigger_captured.set()  # Signal that trigger is captured
                         print("Ask a question")
 
                         audio_input = recognizer.listen(source, timeout=5)
@@ -101,12 +104,7 @@ def stop_assistant():
     return "Assistant stopped"
 
 @app.route('/get_output', methods=['GET'])
-def get_output():
-    chat_transcript = ""
-    for message in conversation:
-        if message['role'] != 'system':
-            chat_transcript += message['role'] + ": " + message['content'] + "\n\n"
-
+def get_output(chat_transcript):
     output_data = {
         "text": chat_transcript,
         "audio_url": "C:\\Users\\wolfe\\OneDrive\\Desktop\\Voice-Assistant-OpenAI\\temp_audio.wav"
@@ -119,3 +117,5 @@ def index():
 
 if __name__ == "__main__":
     threading.Thread(target=app.run, kwargs={"debug": True}).start()
+    threading.Thread(target=listen_for_trigger).start()
+
